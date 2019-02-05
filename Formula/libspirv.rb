@@ -3,7 +3,7 @@ class Libspirv < Formula
   homepage "https://github.com/KhronosGroup/SPIRV-Tools"
   url "https://github.com/KhronosGroup/SPIRV-Tools/archive/v2019.1.tar.gz"
   sha256 "9f7dac47201c86cc2336252630f1471d52b9207a3b01c5411daefcfe827f410f"
-  head "https://github.com/KhronosGroup/SPIRV-Tools.git", :tag => "2019.1"
+  head "https://github.com/KhronosGroup/SPIRV-Tools.git", :tag => "v2019.1"
   depends_on "cmake" => :build
 
   resource "SPIRV-Headers" do
