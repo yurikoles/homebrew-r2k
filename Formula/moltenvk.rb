@@ -8,16 +8,17 @@ class Moltenvk < Formula
   depends_on "ninja" => :build
   depends_on "python" => :build
   depends_on "vulkan-headers" => :build
+  depends_on "vulkan-portability" => :build
   depends_on "cereal"
   depends_on "spirv-tools"
 
   # resource "Vulkan-Headers" do
-  #   url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
-  # end
+  #   url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
+  # end
 
-  resource "Vulkan-Portability" do
-    url "https://github.com/KhronosGroup/Vulkan-Portability.git", :commit => "53be040f04ce55463d0e5b25fd132f45f003e903"
-  end
+  # resource "Vulkan-Portability" do
+  #   url "https://github.com/KhronosGroup/Vulkan-Portability.git", :commit => "53be040f04ce55463d0e5b25fd132f45f003e903"
+  # end
 
   resource "SPIRV-Cross" do
     url "https://github.com/KhronosGroup/SPIRV-Cross.git", :commit => "a029d3faa12082bb4fac78351701d832716759df"
