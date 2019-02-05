@@ -30,17 +30,17 @@ class Moltenvk < Formula
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       # libraries
-      s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"#{HOMEBREW_PREFIX}/lib/\"";'
+      s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\"";'
       # includes
-      s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"#{HOMEBREW_PREFIX}/include/spirv_cross/\"",'
-      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"#{HOMEBREW_PREFIX}/include/spirv-tools/\"",'
+      s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/" +'\"",'
+      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/" +'\"",'
       #s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
-      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\"",', '"\"#{HOMEBREW_PREFIX}/include/spirv/\"",'
+      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv/" +'\"",'
       #s.gsub! '"\"$(SRCROOT)/glslang/build/External/spirv-tools\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
     end
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
-      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', '"\"#{HOMEBREW_PREFIX}/include\"",'
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
     end
 
     xcodebuild "-project",
