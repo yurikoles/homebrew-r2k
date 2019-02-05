@@ -42,7 +42,7 @@ class Libspirv < Formula
     # Remove unrecognized options if warned by configure
     mkdir "build" do
       system "cmake", "..", *std_cmake_args
-      system "make", "install"
+      #system "make", "install"
     end
   end
 
