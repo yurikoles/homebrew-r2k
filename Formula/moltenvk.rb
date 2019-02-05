@@ -28,7 +28,7 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
-    inreplace "MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
+    inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       s.gsub! "LIBRARY_SEARCH_PATHS = (",
         "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
       s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
