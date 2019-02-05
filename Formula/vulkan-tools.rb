@@ -6,10 +6,18 @@ class VulkanTools < Formula
   depends_on "cmake" => :build
   depends_on "python" => :build
 
+  resource "MoltenVK" do
+    url "https://github.com/KhronosGroup/MoltenVK.git", :tag => "v1.0.32"
+  end
+
   def install
+    resources.each do |resource|
+      resource.stage buildpath/"external"/resource.name
+    end
     args = std_cmake_args + %w[
       -DBUILD_CUBE=OFF
-      -DBUILD_VULKANINFO=OFF
+      -DBUILD_VULKANINFO=ON
+      -DMOLTENVK_REPO_ROOT={#buildpath}/"external"/"MoltenVK"/
     ]
     mkdir "build" do
       system "cmake", "..", *args
