@@ -21,7 +21,7 @@ class Moltenvk < Formula
   def install
     args = %w[
       -project MoltenVKPackaging.xcodeproj
-      -scheme 'MoltenVK Package'
+      -scheme "MoltenVK Package"
       build
     ]
     # resources.each do |resource|
