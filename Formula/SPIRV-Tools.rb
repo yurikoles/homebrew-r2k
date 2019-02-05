@@ -1,4 +1,4 @@
-class spirvTools < Formula
+class SpirvTools < Formula
   desc "Provides an API and commands for processing SPIR-V modules"
   homepage "https://github.com/KhronosGroup/SPIRV-Tools"
   url "https://github.com/KhronosGroup/SPIRV-Tools/archive/v2019.1.tar.gz"
