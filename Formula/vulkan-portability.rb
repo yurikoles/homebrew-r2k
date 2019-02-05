@@ -8,7 +8,7 @@ class VulkanPortability < Formula
   depends_on "vulkan-headers"
 
   def install
-    include.install "#{HOMEBREW_PREFIX}/"
+    (include/"vulkan").install "include/vulkan/vk_extx_portability_subset.h"
   end
 
   test do
