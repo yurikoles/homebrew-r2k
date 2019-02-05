@@ -22,7 +22,9 @@ class Moltenvk < Formula
       build
     ]
 
-    inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/*", '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/*"].select, { |ff| File.file?(ff) }.each do |s|
+      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
+    end
 
     # resources.each do |resource|
     #    resource.stage buildpath/"external"/resource.name
