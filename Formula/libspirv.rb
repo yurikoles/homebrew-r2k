@@ -6,7 +6,7 @@ class Libspirv < Formula
   head "https://github.com/KhronosGroup/SPIRV-Tools.git", :tag => "2019.1"
   depends_on "cmake" => :build
 
-  resource "libspirv-headers" do
+  resource "SPIRV-Headers" do
     url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
   end
 
