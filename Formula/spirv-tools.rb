@@ -8,7 +8,7 @@ class SpirvTools < Formula
   depends_on "spirv-headers"
 
   resource "SPIRV-Headers" do
-    url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
+    url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git, :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
   end
 
   def install
