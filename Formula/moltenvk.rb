@@ -28,15 +28,21 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
+    inreplace "MoltenVKPackaging.xcodeproj/project.pbxproj" do |s|
+      s.gsub! "HEADER_SEARCH_PATHS = (",
+        "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
+      s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
+        "HEADER_SEARCH_PATHS = (\"$(SRCROOT)/../External/build/macOS\", #{HOMEBREW_PREFIX}/include);"
+      s.gsub! "buildSettings = {", 'buildSettings ={ OTHER_LDFLAGS = "-lspirv -lglslang -lspirv-tools";'
+    end
+
     xcodebuild "-project",
-      '#{buildpath}/"MoltenVKPackaging.xcodeproj"',
+      "MoltenVKPackaging.xcodeproj",
       "-scheme",
       "MoltenVK Package",
       "build",
       "SYMROOT=build",
-      "OBJROOT=build",
-      'HEADER_SEARCH_PATHS = "#{HOMEBREW_PREFIX}/include"',
-      'LIBRARY_SEARCH_PATHS = "#{HOMEBREW_PREFIX}/lib"'
+      "OBJROOT=build"
   end
 
   test do
