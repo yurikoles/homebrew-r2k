@@ -7,8 +7,12 @@ class VulkanTools < Formula
   depends_on "python" => :build
 
   def install
+    args = std_cmake_args + %w[
+      -DBUILD_CUBE=OFF
+      -DBUILD_VULKANINFO=OFF
+    ]
     mkdir "build" do
-      system "cmake", "..", *std_cmake_args 
+      system "cmake", "..", *args
       system "make"
       system "make", "install"
     end
