@@ -29,7 +29,7 @@ class Moltenvk < Formula
     end
 
     inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
-      s.gsub! '#include <vulkan-portability/vk_extx_portability_subset.h>', '#include <vulkan/vk_extx_portability_subset.h>'
+      s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
     end
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
