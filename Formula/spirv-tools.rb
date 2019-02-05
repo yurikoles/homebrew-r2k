@@ -10,10 +10,6 @@ class SpirvTools < Formula
     url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
   end
 
-  def make_spirv_headers_symlinks
-    include.install_symlink Dir["#{buildpath}/external/include/spirv"]
-  end
-
   def install
     args = std_cmake_args + %w[
       -DSPIRV_SKIP_EXECUTABLES=ON
@@ -21,6 +17,7 @@ class SpirvTools < Formula
     ]
     resources.each do |resource|
       resource.stage buildpath/"external"/resource.name
+      include.install_symlink "#{buildpath}/external/include/spirv"
     end
     make_spirv_headers_symlinks
     mkdir "build" do
