@@ -33,6 +33,13 @@ class Libspirv < Formula
   def install
     resource("libspirv-headers").stage do
       save_env do
+        dirs = []
+        archs.each do |arch|
+          dir = "external"
+          dirs << dir
+  def install
+    resource("libspirv-headers").stage do
+      save_env do
         prefix.install Dir["external/*"]
       end
     end
