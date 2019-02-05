@@ -28,6 +28,10 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
     end
 
+    inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*"].each do |s|
+      s.gsub! '#include <vulkan-portability/vk_extx_portability_subset.h>', '#include <vulkan/vk_extx_portability_subset.h>'
+    end
+
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       # libraries
       s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\"";'
@@ -46,7 +50,7 @@ class Moltenvk < Formula
     xcodebuild "-project",
       "MoltenVKPackaging.xcodeproj",
       "-scheme",
-      "MoltenVK Package",
+      "MoltenVK Package (macOS only)",
       "build",
       "SYMROOT=build",
       "OBJROOT=build"
