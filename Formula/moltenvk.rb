@@ -10,16 +10,9 @@ class Moltenvk < Formula
   depends_on "python" => :build
   depends_on "vulkan-headers" => :build
   depends_on "vulkan-portability" => :build
+  depends_on "glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
-
-  # resource "SPIRV-Cross" do
-  #   url "https://github.com/KhronosGroup/SPIRV-Cross.git", :commit => "a029d3faa12082bb4fac78351701d832716759df"
-  # end
-
-  resource "glslang" do
-    url "https://github.com/KhronosGroup/glslang.git", :commit => "2898223375d57fb3974f24e1e944bb624f67cb73"
-  end
 
   resource "Vulkan-Tools" do
     url "https://github.com/KhronosGroup/Vulkan-Tools.git", :commit => "ff56a741b1cce8ae20ff6276f51100e668e9c4f5"
