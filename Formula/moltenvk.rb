@@ -19,7 +19,7 @@ class Moltenvk < Formula
   # end
   def install
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/SPIRVToMSLConverter.h"].each do |s|
-      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', '#include "spirv_cross/spirv.hpp"'
+      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', '#include <spirv/spirv.hpp>'
     end
 
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/MoltenVKSPIRVToMSLConverter.cpp"].each do |s|
@@ -28,9 +28,9 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
     end
 
-    inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
-      s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
-    end
+    # inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
+    #   s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
+    # end
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       # libraries
