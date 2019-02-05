@@ -13,20 +13,24 @@ class Moltenvk < Formula
   depends_on "glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
-  depends_on "vulkan-tools"
 
-  resource "VulkanSamples" do
-    url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
-  end
+  # resource "VulkanSamples" do
+  #   url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
+  # end
 
   def install
-    # args = std_cmake_args + %w[
-    #  -DSPIRV_BUILD_COMPRESSION=ON
-    # ]
-    resources.each do |resource|
-      resource.stage buildpath/"external"/resource.name
-    end
-    system "make", "macos"
+    args = %w[
+      -project
+      MoltenVKPackaging.xcodeproj
+      -scheme
+      "MoltenVK Package"
+      build
+    ]
+    # resources.each do |resource|
+    #    resource.stage buildpath/"external"/resource.name
+    # end
+    # system "make", "all"
+    system "xcodebuild *args"
   end
 
   test do
