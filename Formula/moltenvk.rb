@@ -1,18 +1,19 @@
 class Moltenvk < Formula
-  desc "MoltenVK is an implementation of the Vulkan 1.0 graphics and compute API, that runs on Apple's Metal graphics "
+  desc "Implementation of the Vulkan 1.0 API, that runs on Apple's Metal API"
   homepage "https://github.com/KhronosGroup/MoltenVK"
   url "https://github.com/KhronosGroup/MoltenVK/archive/v1.0.32.tar.gz"
   sha256 "43538642e604976883e86462a52f571e6aa7576fe5f4f0d3bee38227bca8c086"
   head "https://github.com/KhronosGroup/MoltenVK.git", :tag => "v1.0.32"
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "python3" => :build
+  depends_on "python" => :build
+  depends_on "vulkan-headers" => :build
   depends_on "cereal"
   depends_on "spirv-tools"
 
-  resource "Vulkan-Headers" do
-    url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
-  end
+  # resource "Vulkan-Headers" do
+  #   url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
+  # end
 
   resource "Vulkan-Portability" do
     url "https://github.com/KhronosGroup/Vulkan-Portability.git", :commit => "53be040f04ce55463d0e5b25fd132f45f003e903"
@@ -35,11 +36,11 @@ class Moltenvk < Formula
   end
 
   def install
-    #args = std_cmake_args + %w[
+    # args = std_cmake_args + %w[
     #  -DSPIRV_BUILD_COMPRESSION=ON
-    #]
+    # ]
     resources.each do |resource|
-      resource.stage buildpath/"external"/resource.name 
+      resource.stage buildpath/"external"/resource.name
     end
     system "make", "macos"
   end
