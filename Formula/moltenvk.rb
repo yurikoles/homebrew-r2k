@@ -28,12 +28,17 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
-    inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
-      s.gsub! "LIBRARY_SEARCH_PATHS = (",
-        "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
-      s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
-        "HEADER_SEARCH_PATHS = (\"$(SRCROOT)/../External/build/macOS\", #{HOMEBREW_PREFIX}/include);"
-      s.gsub! "buildSettings = {", 'buildSettings ={ OTHER_LDFLAGS = "-lspirv -lspirv-tools";'
+    #inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
+    #  s.gsub! "LIBRARY_SEARCH_PATHS = (",
+    #    "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
+    #  s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
+    #    "HEADER_SEARCH_PATHS = (\"$(SRCROOT)/../External/build/macOS\", #{HOMEBREW_PREFIX}/include);"
+    #  s.gsub! "buildSettings = {", 'buildSettings ={ OTHER_LDFLAGS = "-lspirv -lspirv-tools";'
+    #end
+
+    inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",',
+        ""\"#{HOMEBREW_PREFIX}/include\""
     end
 
     xcodebuild "-project",
