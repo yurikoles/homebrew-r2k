@@ -29,7 +29,7 @@ class Moltenvk < Formula
     end
 
     inreplace "MoltenVKPackaging.xcodeproj/project.pbxproj" do |s|
-      s.gsub! "HEADER_SEARCH_PATHS = (",
+      s.gsub! "LIBRARY_SEARCH_PATHS = (",
         "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
       s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
         "HEADER_SEARCH_PATHS = (\"$(SRCROOT)/../External/build/macOS\", #{HOMEBREW_PREFIX}/include);"
