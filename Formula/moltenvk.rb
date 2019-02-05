@@ -34,7 +34,7 @@ class Moltenvk < Formula
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       # libraries
-      s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\"";'
+      s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\""'
       # includes
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/" +'\"",'
