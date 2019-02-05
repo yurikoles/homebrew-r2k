@@ -13,10 +13,7 @@ class Moltenvk < Formula
   depends_on "glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
-
-  resource "Vulkan-Tools" do
-    url "https://github.com/KhronosGroup/Vulkan-Tools.git", :commit => "ff56a741b1cce8ae20ff6276f51100e668e9c4f5"
-  end
+  depends_on "vulkan-tools"
 
   resource "VulkanSamples" do
     url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
