@@ -19,7 +19,7 @@ class Moltenvk < Formula
   # end
 
   def install
-    args += %w[
+    args = %w[
       -project
       MoltenVKPackaging.xcodeproj
       -scheme
