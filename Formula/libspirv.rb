@@ -42,7 +42,7 @@ class Libspirv < Formula
     #  "--disable-dependency-tracking",
     #  "--disable-silent-rules",
     #  "--prefix=#{prefix}"
-    system "cmake", ".", *std_cmake_args, "SPIRV_SKIP_EXECUTABLES=ON", "SPIRV_BUILD_COMPRESSION=ON"
+    system "cmake", ".", *std_cmake_args, "SPIRV_SKIP_EXECUTABLES=ON SPIRV_BUILD_COMPRESSION=ON"
     system "make", "install" # zif this fails, try separate make/make install steps
   end
 
