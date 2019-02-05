@@ -16,13 +16,13 @@ class SpirvTools < Formula
       -DSPIRV_BUILD_COMPRESSION=ON
     ]
     resources.each do |resource|
-      resource.stage buildpath/"external"/resource.name
-      include.install_symlink ["external/include/spirv/"]
+      resource.stage buildpath/"external"/resource.name 
     end
 
     mkdir "build" do
       system "cmake", "..", *args
       system "make", "install"
+      include.install_symlink ["../external/include/spirv/"]
     end
   end
 
