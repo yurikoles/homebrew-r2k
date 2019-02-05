@@ -19,13 +19,13 @@ class Moltenvk < Formula
   # end
   def install
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/SPIRVToMSLConverter.h"].each do |s|
-      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
+      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', '#include "spirv_cross/spirv.hpp"'
     end
 
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/MoltenVKSPIRVToMSLConverter.cpp"].each do |s|
-      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <glslang/spirv/GlslangToSpv.h>"
-      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <glslang/spirv/disassemble.h>"
-      s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
+      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', '#include "glslang/spirv/GlslangToSpv.h"'
+      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', '#include "glslang/spirv/disassemble.h"'
+      s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
     end
 
     #inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
