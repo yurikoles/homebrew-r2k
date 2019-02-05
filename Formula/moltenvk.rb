@@ -18,10 +18,6 @@ class Moltenvk < Formula
   #   url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
   # end
   def install
-    args = %w[
-      build
-    ]
-
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/SPIRVToMSLConverter.h"].each do |s|
       s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
     end
@@ -32,7 +28,15 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
-    xcodebuild "-project #{buildpath}/MoltenVKPackaging.xcodeproj", '-scheme "MoltenVK Package"', "build", "SYMROOT=build", "OBJROOT=build"
+    xcodebuild "-project",
+      '#{buildpath}/"MoltenVKPackaging.xcodeproj"',
+      "-scheme",
+      "MoltenVK Package",
+      "build",
+      "SYMROOT=build",
+      "OBJROOT=build",
+      'HEADER_SEARCH_PATHS = "#{HOMEBREW_PREFIX}/include"',
+      'LIBRARY_SEARCH_PATHS = "#{HOMEBREW_PREFIX}/lib"'
   end
 
   test do
