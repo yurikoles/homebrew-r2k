@@ -22,14 +22,16 @@ class Moltenvk < Formula
       build
     ]
 
-    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/*"].each do |s|
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/MoltenVKSPIRVToMSLConverter.*"].each do |s|
       s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
     end
 
-    # resources.each do |resource|
-    #    resource.stage buildpath/"external"/resource.name
-    # end
-    # system "make", "all"
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/MoltenVKSPIRVToMSLConverter.cpp"].each do |s|
+      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <glslang/spirv/GlslangToSpv.h>"
+      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <glslang/spirv/disassemble.h>"
+      s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
+    end
+
     xcodebuild "-project #{buildpath}/MoltenVKPackaging.xcodeproj", '-scheme "MoltenVK Package"', "build", "SYMROOT=build", "OBJROOT=build"
   end
 
