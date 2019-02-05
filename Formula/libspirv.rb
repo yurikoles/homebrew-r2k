@@ -36,7 +36,7 @@ class Libspirv < Formula
       -SPIRV_BUILD_COMPRESSION=ON
     ]
     resources.each do |resource|
-          resource.stage buildpath/"external"/
+      resource.stage buildpath/"external"/
     end
     # ENV.deparallelize  # if your formula fails when building in parallel
     # Remove unrecognized options if warned by configure
