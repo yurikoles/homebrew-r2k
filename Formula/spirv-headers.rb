@@ -6,7 +6,7 @@ class SpirvHeaders < Formula
 
   def install
     mkdir "build" do
-      system "cmake", ".."
+      system "cmake", *std_cmake_args , ".."
       system "cmake", "--build", ".", "--target", "install"
     end
   end
