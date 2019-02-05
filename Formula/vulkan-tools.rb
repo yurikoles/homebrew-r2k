@@ -4,7 +4,6 @@ class VulkanTools < Formula
   url "https://github.com/KhronosGroup/Vulkan-Tools.git", :commit => "ff56a741b1cce8ae20ff6276f51100e668e9c4f5"
   head "https://github.com/KhronosGroup/Vulkan-Tools.git"
   depends_on "cmake" => :build
-  depends_on "pyhton3" => :build
   depends_on "python" => :build
 
   def install
