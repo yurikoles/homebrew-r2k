@@ -33,10 +33,10 @@ class Libspirv < Formula
   def install
     args = std_cmake_args + %w[
       -SPIRV_SKIP_EXECUTABLES=ON
-      -SPIRV_BUILD_COMPRESSION=ON
     ]
+    # -SPIRV_BUILD_COMPRESSION=ON
     resources.each do |resource|
-          resource.stage buildpath/"external"/resource.name
+      resource.stage buildpath/"external"/resource.name
     end
     # ENV.deparallelize  # if your formula fails when building in parallel
     # Remove unrecognized options if warned by configure
