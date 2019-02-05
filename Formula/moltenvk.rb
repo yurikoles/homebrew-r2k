@@ -20,15 +20,13 @@ class Moltenvk < Formula
 
   def install
     args = %w[
-      -project MoltenVKPackaging.xcodeproj
-      -scheme "MoltenVK Package"
       build
     ]
     # resources.each do |resource|
     #    resource.stage buildpath/"external"/resource.name
     # end
     # system "make", "all"
-    xcodebuild *args, "SYMROOT=build", "OBJROOT=build"
+    xcodebuild "-project MoltenVKPackaging.xcodeproj", '-scheme "MoltenVK Package"', "build", "SYMROOT=build", "OBJROOT=build"
   end
 
   test do
