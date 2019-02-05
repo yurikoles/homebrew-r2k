@@ -28,7 +28,7 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
     end
 
-    inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*"].each do |s|
+    inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
       s.gsub! '#include <vulkan-portability/vk_extx_portability_subset.h>', '#include <vulkan/vk_extx_portability_subset.h>'
     end
 
