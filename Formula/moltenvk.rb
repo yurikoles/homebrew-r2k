@@ -37,8 +37,7 @@ class Moltenvk < Formula
     #end
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
-      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",',
-        ""\"#{HOMEBREW_PREFIX}/include\""
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",','"\"#{HOMEBREW_PREFIX}/include\"",'
     end
 
     xcodebuild "-project",
