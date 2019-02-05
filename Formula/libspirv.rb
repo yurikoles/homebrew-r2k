@@ -31,19 +31,19 @@ class Libspirv < Formula
   end
 
   def install
-    resource("libspirv-headers").stage do
-      #save_env do
-      prefix.install Dir["external/*"]
-      #end
+    args = std_cmake_args + %w[
+      -SPIRV_SKIP_EXECUTABLES=ON
+      -SPIRV_BUILD_COMPRESSION=ON
+    ]
+    resources.each do |resource|
+          resource.stage buildpath/"external"/
     end
     # ENV.deparallelize  # if your formula fails when building in parallel
     # Remove unrecognized options if warned by configure
-    #system "./configure", "--disable-debug",
-    #  "--disable-dependency-tracking",
-    #  "--disable-silent-rules",
-    #  "--prefix=#{prefix}"
-    system "cmake", ".", *std_cmake_args, "-SPIRV_SKIP_EXECUTABLES=ON", "-SPIRV_BUILD_COMPRESSION=ON"
-    system "make", "install" # zif this fails, try separate make/make install steps
+    mkdir "build" do
+      system "cmake", "..", *args
+      system "make", "install"
+    end
   end
 
   test do
