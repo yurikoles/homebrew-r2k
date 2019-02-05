@@ -28,16 +28,19 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
     end
 
-    #inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
-    #  s.gsub! "LIBRARY_SEARCH_PATHS = (",
-    #    "LIBRARY_SEARCH_PATHS = (\"$(inherited)\", #{HOMEBREW_PREFIX}/lib, "
-    #  s.gsub! "HEADER_SEARCH_PATHS = \"$(SRCROOT)/../External/build/macOS\";",
-    #    "HEADER_SEARCH_PATHS = (\"$(SRCROOT)/../External/build/macOS\", #{HOMEBREW_PREFIX}/include);"
-    #  s.gsub! "buildSettings = {", 'buildSettings ={ OTHER_LDFLAGS = "-lspirv -lspirv-tools";'
-    #end
+    inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
+      # libraries
+      s.gsub! '\"$(SRCROOT)/../External/build/macOS\"', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib/\"");'
+      # includes
+      s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\""', '"\"#{HOMEBREW_PREFIX}/include/spirv_cross/\""'
+      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\""', '"\"#{HOMEBREW_PREFIX}/include/spirv-tools/\""'
+      #s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
+      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\""', '"\"#{HOMEBREW_PREFIX}/include/spirv/\""'
+      #s.gsub! '"\"$(SRCROOT)/glslang/build/External/spirv-tools\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
+    end
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
-      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",','"\"#{HOMEBREW_PREFIX}/include\"",'
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', '"\"#{HOMEBREW_PREFIX}/include\"",'
     end
 
     xcodebuild "-project",
