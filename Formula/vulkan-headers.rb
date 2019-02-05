@@ -1,13 +1,15 @@
-class SpirvHeaders < Formula
-  desc "Provides the header files for the Vulkan SPIR-V Registry"
-  homepage "https://github.com/KhronosGroup/SPIRV-Headers"
-  url "https://github.com/KhronosGroup/SPIRV-Headers.git", :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
+class VulkanHeaders < Formula
+  desc "Provides header files and the Vulkan API definition (registry)"
+  homepage "https://github.com/KhronosGroup/Vulkan-Headers"
+  url "https://github.com/KhronosGroup/Vulkan-Headers/archive/Vulkan-Headers-sdk-1.1.97.0.tar.gz"
+  sha256 "a09c83df5647e53ef511a1f2563dec02fae8f13880808914175dc26b06159f16"
+  head "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
   depends_on "cmake" => :build
 
   def install
     mkdir "build" do
       system "cmake", *std_cmake_args, ".."
-      system "cmake", "--build", ".", "--target", "install"
+      system "make", "install"
     end
   end
 
