@@ -31,7 +31,7 @@ class Moltenvk < Formula
   end
 
   resource "VulkanSamples" do
-    url "https://github.com/KhronosGroup/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
+    url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
   end
 
   def install
