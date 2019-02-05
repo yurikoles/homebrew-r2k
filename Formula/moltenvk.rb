@@ -38,7 +38,7 @@ class Moltenvk < Formula
       # includes
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/" +'\"",'
-      #s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
+      s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\""', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv/" +'\"",'
       #s.gsub! '"\"$(SRCROOT)/glslang/build/External/spirv-tools\""', '("\"$(SRCROOT)/../External/build/macOS\"","\"#{HOMEBREW_PREFIX}/lib"");'
     end
