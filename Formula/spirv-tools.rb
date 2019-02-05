@@ -17,9 +17,9 @@ class SpirvTools < Formula
     ]
     resources.each do |resource|
       resource.stage buildpath/"external"/resource.name
-      include.install_symlink "#{buildpath}/external/include/spirv"
+      include.install_symlink ["external/include/spirv/"]
     end
-    make_spirv_headers_symlinks
+
     mkdir "build" do
       system "cmake", "..", *args
       system "make", "install"
