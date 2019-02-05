@@ -1,7 +1,8 @@
 class SpirvHeaders < Formula
   desc "Provides machine-readable files for the Vulkan SPIR-V Registry"
   homepage "https://github.com/KhronosGroup/SPIRV-Headers"
-  url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
+  url "https://github.com/KhronosGroup/SPIRV-Headers.git", :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
+  sha1 "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
   depends_on "cmake" => :build
 
   def install
