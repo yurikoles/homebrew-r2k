@@ -26,7 +26,7 @@ class Moltenvk < Formula
     #    resource.stage buildpath/"external"/resource.name
     # end
     # system "make", "all"
-    xcodebuild "-project MoltenVKPackaging.xcodeproj", '-scheme "MoltenVK Package"', "build", "SYMROOT=build", "OBJROOT=build"
+    xcodebuild "-project #{buildpath}/MoltenVKPackaging.xcodeproj", '-scheme "MoltenVK Package"', "build", "SYMROOT=build", "OBJROOT=build"
   end
 
   test do
