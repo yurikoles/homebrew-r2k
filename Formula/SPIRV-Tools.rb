@@ -1,4 +1,4 @@
-class Libspirv < Formula
+class spirvTools < Formula
   desc "Provides an API and commands for processing SPIR-V modules"
   homepage "https://github.com/KhronosGroup/SPIRV-Tools"
   url "https://github.com/KhronosGroup/SPIRV-Tools/archive/v2019.1.tar.gz"
@@ -8,26 +8,6 @@ class Libspirv < Formula
 
   resource "SPIRV-Headers" do
     url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
-  end
-
-  # Store and restore some of our environment
-  def save_env
-    saved_cflags = ENV["CFLAGS"]
-    saved_ldflags = ENV["LDFLAGS"]
-    saved_homebrew_archflags = ENV["HOMEBREW_ARCHFLAGS"]
-    saved_homebrew_cccfg = ENV["HOMEBREW_CCCFG"]
-    saved_makeflags = ENV["MAKEFLAGS"]
-    saved_homebrew_optflags = ENV["HOMEBREW_OPTFLAGS"]
-    begin
-      yield
-    ensure
-      ENV["CFLAGS"] = saved_cflags
-      ENV["LDFLAGS"] = saved_ldflags
-      ENV["HOMEBREW_ARCHFLAGS"] = saved_homebrew_archflags
-      ENV["HOMEBREW_CCCFG"] = saved_homebrew_cccfg
-      ENV["MAKEFLAGS"] = saved_makeflags
-      ENV["HOMEBREW_OPTFLAGS"] = saved_homebrew_optflags
-    end
   end
 
   def install
