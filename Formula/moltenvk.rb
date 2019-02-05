@@ -17,11 +17,13 @@ class Moltenvk < Formula
   # resource "VulkanSamples" do
   #   url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
   # end
-
   def install
     args = %w[
       build
     ]
+
+    inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/SPIRVToMSLConverter.cpp", '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
+
     # resources.each do |resource|
     #    resource.stage buildpath/"external"/resource.name
     # end
