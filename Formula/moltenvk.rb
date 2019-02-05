@@ -19,7 +19,7 @@ class Moltenvk < Formula
   # end
   def install
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKSPIRVToMSLConverter/SPIRVToMSLConverter.h"].each do |s|
-      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv-cross/spirv.hpp>"
+      s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
     end
 
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/MoltenVKSPIRVToMSLConverter.cpp"].each do |s|
