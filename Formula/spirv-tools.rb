@@ -5,6 +5,7 @@ class SpirvTools < Formula
   sha256 "9f7dac47201c86cc2336252630f1471d52b9207a3b01c5411daefcfe827f410f"
   head "https://github.com/KhronosGroup/SPIRV-Tools.git", :tag => "v2019.1"
   depends_on "cmake" => :build
+  depends_on "spirv-headers"
 
   resource "SPIRV-Headers" do
     url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git
@@ -12,7 +13,6 @@ class SpirvTools < Formula
 
   def install
     args = std_cmake_args + %w[
-      -DSPIRV_SKIP_EXECUTABLES=ON
       -DSPIRV_BUILD_COMPRESSION=ON
     ]
     resources.each do |resource|
@@ -22,7 +22,6 @@ class SpirvTools < Formula
     mkdir "build" do
       system "cmake", "..", *args
       system "make", "install"
-      include.install_symlink ["../external/include/spirv/"]
     end
   end
 
