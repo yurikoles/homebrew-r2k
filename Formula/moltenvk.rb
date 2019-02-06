@@ -28,9 +28,9 @@ class Moltenvk < Formula
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
-    # inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
-    #   s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
-    # end
+    inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/API/mkv_vulkan.h"].each do |s|
+       s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
+    end
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
       # libraries
@@ -40,6 +40,7 @@ class Moltenvk < Formula
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv/" +'\"",'
+      s.gsub! '"\"$(SRCROOT)/glslang/build/External/spirv-tools\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/glslang/" +'\"",'
       s.gsub! "path = ../External/build/macOS/libSPIRVTools.a;", "path = #{HOMEBREW_PREFIX}/lib/libSPIRV-Tools.a;"
       s.gsub! "path = ../External/build/macOS/libSPIRVCross.a;", "path = #{HOMEBREW_PREFIX}/lib/libspirv-cross-core.a;"
       s.gsub! "path = ../External/build/macOS/libglslang.a;", "path = #{HOMEBREW_PREFIX}/lib/libglslang.a;"
