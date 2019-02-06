@@ -22,10 +22,10 @@ class Moltenvk < Formula
       s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
     end
 
-    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/MoltenVKSPIRVToMSLConverter.cpp"].each do |s|
-      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', '#include "glslang/spirv/GlslangToSpv.h"'
-      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', '#include "glslang/spirv/disassemble.h"'
-      s.gsub! '#include "../glslang/SPIRV/doc.h"', '#include "glslang/spirv/doc.h"'
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/Molten*Converter/*Converter.cpp"].each do |s|
+      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <glslang/spirv/GlslangToSpv.h>"
+      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <glslang/spirv/disassemble.h>"
+      s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
     # inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/**/*.h"].each do |s|
