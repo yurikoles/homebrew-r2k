@@ -22,14 +22,14 @@ class Moltenvk < Formula
       s.gsub! '#include "../SPIRV-Cross/spirv.hpp"', "#include <spirv_cross/spirv.hpp>"
     end
 
-    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/Molten*Converter/*Converter.cpp"].each do |s|
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/GLSLToSPIRVConverter.cpp"].each do |s|
       s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <glslang/spirv/GlslangToSpv.h>"
       s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <glslang/spirv/disassemble.h>"
       s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
     end
 
     inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/API/mkv_vulkan.h"].each do |s|
-       s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
+      s.gsub! "#include <vulkan-portability/vk_extx_portability_subset.h>", "#include <vulkan/vk_extx_portability_subset.h>"
     end
 
     inreplace "#{buildpath}/MoltenVKShaderConverter/MoltenVKShaderConverter.xcodeproj/project.pbxproj" do |s|
