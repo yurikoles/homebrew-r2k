@@ -16,7 +16,7 @@ class VulkanTools < Formula
     end
     args = std_cmake_args + %w[
       -DBUILD_CUBE=OFF
-      -DBUILD_VULKANINFO=OFF
+      -DBUILD_VULKANINFO=ON
       -DMOLTENVK_REPO_ROOT=#{prefix}/"external"/
     ]
     mkdir "build" do
