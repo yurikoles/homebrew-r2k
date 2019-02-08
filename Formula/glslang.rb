@@ -15,7 +15,7 @@ class Glslang < Formula
     args = std_cmake_args + [
       "-DBUILD_SHARED_LIBS=ON",
       "-DCXX_INCLUDE_PATH=#{Formula["spirv-tools"].opt_include}",
-      "-LDFLAGS=-L#{Formula["spirv-tools"].opt_lib}"
+      "-DLDFLAGS=-L#{Formula["spirv-tools"].opt_lib}"
     ]
 
     #Forcing the use of spirv-tools
