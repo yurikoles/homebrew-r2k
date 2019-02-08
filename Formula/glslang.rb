@@ -20,7 +20,7 @@ class Glslang < Formula
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/GLSLToSPIRVConverter.cpp"].each do |s|
       s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
       s.gsub! "if(ENABLE_OPT)", \
-        "set(ENABLE_OPT OFF)" \
+        "set(ENABLE_OPT ON)" \
         "if(ENABLE_OPT)"
     end
 
