@@ -14,7 +14,7 @@ class Glslang < Formula
     # Disabling Tests for now
     args = std_cmake_args + [
       "-DBUILD_SHARED_LIBS=ON",
-      "-DC_INCLUDE_PATH=#{Formula["spirv-tools"].opt_include}",
+      "-DCXX_INCLUDE_PATH=#{Formula["spirv-tools"].opt_include}",
       "-LDFLAGS=-L#{Formula["spirv-tools"].opt_lib}"
     ]
 
