@@ -25,7 +25,7 @@ class Glslang < Formula
     end
 
     mkdir "build" do
-      system "cmake", "-G", "ninja", "..", *args
+      system "cmake", "-G", "Ninja", "..", *args
       system "ninja"
     end
   end
