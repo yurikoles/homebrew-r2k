@@ -46,7 +46,7 @@ class Moltenvk < Formula
           "\"/usr/local/include/spirv/**\"," \
           "\"/usr/local/include/glslang/**\"," \
           ");"
-      s.gsub! "MACOSX_DEPLOYMENT_TARGET= 10.11;","MACOSX_DEPLOYMENT_TARGET= #{MacOS.version};"
+      s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;","MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
