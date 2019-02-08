@@ -1,11 +1,10 @@
 class SpirvTools < Formula
   desc "Provides an API and commands for processing SPIR-V modules"
   homepage "https://github.com/KhronosGroup/SPIRV-Tools"
-  url "https://github.com/KhronosGroup/SPIRV-Tools/archive/v2019.1.tar.gz"
-  sha256 "9f7dac47201c86cc2336252630f1471d52b9207a3b01c5411daefcfe827f410f"
-  head "https://github.com/KhronosGroup/SPIRV-Tools.git", :tag => "v2019.1"
+  url "https://github.com/KhronosGroup/SPIRV-Tools.git", :commit => "117a1fd11f11e9bef9faa563c3d5156cc6ab529c"
+  head "https://github.com/KhronosGroup/SPIRV-Tools.git"
   depends_on "cmake" => :build
-  depends_on "spirv-headers" => :build
+  depends_on "spirv-headers"
 
   # resource "SPIRV-Headers" do
   #   url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git, :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"

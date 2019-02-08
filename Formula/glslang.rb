@@ -16,18 +16,16 @@ class Glslang < Formula
 
   def install
     # Disabling Tests for now
-    # args = std_cmake_args + %w[
-    #   -DSPIRV_BUILD_COMPRESSION=ON
-    #   -DSPIRV-Headers_SOURCE_DIR="#{HOMEBREW_PREFIX}"
-    #   -DSPIRV_SKIP_TESTS=ON
-    # ]
+    args = std_cmake_args + %w[
+      -DBUILD_SHARED_LIBS=ON
+    ]
     # resources.each do |resource|
     #   resource.stage buildpath/"external"/resource.name
     # end
 
     mkdir "build" do
-      system "cmake", "..", *std_cmake_args
-      system "make", "-j4", "install"
+      system "cmake", "..", *args
+      system "ninja"
     end
   end
 

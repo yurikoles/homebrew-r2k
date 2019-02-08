@@ -8,8 +8,8 @@ class Moltenvk < Formula
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "python" => :build
-  depends_on "vulkan-headers" => :build
-  depends_on "vulkan-portability" => :build
+  depends_on "vulkan-headers"
+  depends_on "vulkan-portability"
   depends_on "glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
@@ -70,6 +70,7 @@ class Moltenvk < Formula
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
       s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
+      s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;","MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
     end
 
     xcodebuild "-project",
