@@ -13,10 +13,10 @@ class SpirvTools < Formula
 
   def install
     # Disabling Tests for now
-    args = std_cmake_args + %w[
-      -DSPIRV_BUILD_COMPRESSION=ON
-      -DSPIRV-Headers_SOURCE_DIR="#{HOMEBREW_PREFIX}"
-      -DSPIRV_SKIP_TESTS=ON
+    args = std_cmake_args + [
+      "-DSPIRV_BUILD_COMPRESSION=ON",
+      "-DSPIRV-Headers_SOURCE_DIR=#{HOMEBREW_PREFIX}",
+      "-DSPIRV_SKIP_TESTS=ON"
     ]
     # resources.each do |resource|
     #   resource.stage buildpath/"external"/resource.name

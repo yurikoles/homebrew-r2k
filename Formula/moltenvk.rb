@@ -23,9 +23,9 @@ class Moltenvk < Formula
     end
 
     inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/GLSLToSPIRVConverter.cpp"].each do |s|
-      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <glslang/spirv/GlslangToSpv.h>"
-      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <glslang/spirv/disassemble.h>"
-      s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <glslang/spirv/doc.h>"
+      s.gsub! '#include "../glslang/SPIRV/GlslangToSpv.h"', "#include <spirv/GlslangToSpv.h>"
+      s.gsub! '#include "../glslang/SPIRV/disassemble.h"', "#include <spirv/disassemble.h>"
+      s.gsub! '#include "../glslang/SPIRV/doc.h"', "#include <spirv/doc.h>"
     end
 
     inreplace Dir["#{buildpath}/MoltenVK/MoltenVK/API/mkv_vulkan.h"].each do |s|
