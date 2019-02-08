@@ -16,7 +16,7 @@ class Glslang < Formula
       -DBUILD_SHARED_LIBS=ON
     ]
 
-    external.install_symlink "#{buildpath}"/"external"/"spirv-tools" => "#{Formula['spirv-tools'].opt}"
+    external.install_symlink "#{buildpath}"/"external"/"spirv-tools" => "#{Formula['spirv-tools'].opt_prefix}"
     #Forcing the use of spirv-tools
 
     mkdir "build" do
