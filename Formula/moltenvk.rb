@@ -44,6 +44,17 @@ class Moltenvk < Formula
       s.gsub! "name = libSPIRVTools.a; path = ../External/build/macOS/libSPIRVTools.a;", "name = libSPIRV-Tools.a; path = #{HOMEBREW_PREFIX}/lib/libSPIRV-Tools.a;"
       s.gsub! "name = libSPIRVCross.a; path = ../External/build/macOS/libSPIRVCross.a;", "name = libspirv-cross-core.a; path = #{HOMEBREW_PREFIX}/lib/libspirv-cross-core.a;"
       s.gsub! "path = ../External/build/macOS/libglslang.a;", "path = #{HOMEBREW_PREFIX}/lib/libglslang.a;"
+      s.gsub! "OTHER_LDFLAGS = "-ObjC";", 
+        "OTHER_LDFLAGS = "-ObjC"" \
+        "HEADER_SEARCH_PATHS = (" \
+          "\"$(inherited)\"," \
+          "\"/usr/local/include/spirv_cross/**\"," \
+          "\"/usr/local/include/spirv-tools/**\"," \
+          "\"/usr/local/include/\"," \
+          "\"/usr/local/include/spirv/**\"," \
+          "\"/usr/local/include/glslang/**\"," \
+        ");" \
+        "LIBRARY_SEARCH_PATHS = \"/usr/local/lib/\";"
     end
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
