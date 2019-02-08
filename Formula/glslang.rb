@@ -12,19 +12,12 @@ class Glslang < Formula
 
   def install
     # Disabling Tests for now
-    args = std_cmake_args + [
-      "-DBUILD_SHARED_LIBS=ON",
-      "-DCXX_INCLUDE_PATH=#{Formula["spirv-tools"].opt_include}",
-      "-DLDFLAGS=-L#{Formula["spirv-tools"].opt_lib}"
+    args = std_cmake_args + %w[
+      -DBUILD_SHARED_LIBS=ON
     ]
 
+    external.install_symlink "external/spirv-tools" => "#{Formula['spirv-tools'].opt}"
     #Forcing the use of spirv-tools
-    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/GLSLToSPIRVConverter.cpp"].each do |s|
-      s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
-      s.gsub! "if(ENABLE_OPT)", \
-        "set(ENABLE_OPT ON)" \
-        "if(ENABLE_OPT)"
-    end
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
