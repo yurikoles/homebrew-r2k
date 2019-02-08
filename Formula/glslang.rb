@@ -3,6 +3,7 @@ class Glslang < Formula
   homepage "https://github.com/KhronosGroup/glslang"
   url "https://github.com/KhronosGroup/glslang.git", :commit => "2898223375d57fb3974f24e1e944bb624f67cb73"
   head "https://github.com/KhronosGroup/glslang.git"
+  version "7.11.3113"
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "spirv-headers" => :build
