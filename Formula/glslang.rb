@@ -14,8 +14,8 @@ class Glslang < Formula
     # Disabling Tests for now
     args = std_cmake_args + [
       "-DBUILD_SHARED_LIBS=ON",
-      "-DCMAKE_INCLUDE_PATH=#{HOMEBREW_PREFIX}/include",
-      "-DCMAKE_LIBRARY_PATH=#{HOMEBREW_PREFIX}/lib"
+      "-DC_INCLUDE_PATH=#{HOMEBREW_PREFIX}/include",
+      "-DC_LIBRARY_PATH=#{HOMEBREW_PREFIX}/lib"
     ]
 
     #Forcing the use of spirv-tools
