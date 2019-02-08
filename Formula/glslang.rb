@@ -10,21 +10,22 @@ class Glslang < Formula
   depends_on "spirv-tools"
   depends_on "bison" => :optional
 
-  # resource "SPIRV-Headers" do
-  #   url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git, :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
-  # end
-
   def install
     # Disabling Tests for now
     args = std_cmake_args + %w[
       -DBUILD_SHARED_LIBS=ON
     ]
-    # resources.each do |resource|
-    #   resource.stage buildpath/"external"/resource.name
-    # end
+
+    #Forcing the use of spirv-tools
+    inreplace Dir["#{buildpath}/MoltenVKShaderConverter/MoltenVKGLSLToSPIRVConverter/GLSLToSPIRVConverter.cpp"].each do |s|
+      s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
+      s.gsub! "if(ENABLE_OPT)", \
+        "set(ENABLE_OPT OFF)" \
+        "if(ENABLE_OPT)"
+    end
 
     mkdir "build" do
-      system "cmake", "..", *args
+      system "cmake", "-G", "ninja", "..", *args
       system "ninja"
     end
   end
