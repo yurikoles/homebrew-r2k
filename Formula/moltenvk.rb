@@ -36,6 +36,17 @@ class Moltenvk < Formula
       # libraries
       s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\""'
       # includes
+      s.gsub! "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;", \
+          "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;" \
+          "HEADER_SEARCH_PATHS = (" \
+          "\"$(inherited)\"," \
+          "\"/usr/local/include/spirv_cross/**\"," \
+          "\"/usr/local/include/spirv-tools/**\"," \
+          "\"/usr/local/include/\"," \
+          "\"/usr/local/include/spirv/**\"," \
+          "\"/usr/local/include/glslang/**\"," \
+          ");"
+      s.gsub! "MACOSX_DEPLOYMENT_TARGET= 10.11,","MACOSX_DEPLOYMENT_TARGET= #{MacOS.version},"
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
