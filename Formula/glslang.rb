@@ -8,7 +8,6 @@ class Glslang < Formula
   depends_on "ninja" => :build
   depends_on "spirv-headers" => :build
   depends_on "spirv-tools"
-  depends_on "phyton"
   depends_on "bison" => :optional
 
   # resource "SPIRV-Headers" do
