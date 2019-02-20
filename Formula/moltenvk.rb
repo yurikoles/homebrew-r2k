@@ -10,7 +10,7 @@ class Moltenvk < Formula
   depends_on "python" => :build
   depends_on "rafaga/r2k/vulkan-headers"
   depends_on "rafaga/r2k/vulkan-portability"
-  depends_on "glslang"
+  depends_on "rafaga/r2k/glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
 
