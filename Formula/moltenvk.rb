@@ -8,8 +8,8 @@ class Moltenvk < Formula
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "python" => :build
-  depends_on "vulkan-headers"
-  depends_on "vulkan-portability"
+  depends_on "rafaga/r2k/vulkan-headers"
+  depends_on "rafaga/r2k/vulkan-portability"
   depends_on "glslang"
   depends_on "spirv-cross"
   depends_on "spirv-tools"
