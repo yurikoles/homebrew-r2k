@@ -18,7 +18,7 @@ class Glslang < Formula
       "-DCMAKE_STATIC_LINKER_FLAGS=#{Formula["spirv-tools"].opt_lib}/libSPIRV-Tools.a",
       "-DCMAKE_EXE_LINKER_FLAGS=-L#{HOMEBREW_PREFIX}/lib",
       "-DENABLE_GLSLANG_BINARIES=OFF",
-      "-DBUILD_SHARED_LIBS=ON",
+      "-DBUILD_SHARED_LIBS=OFF",
     ]
 
     inreplace Dir["#{buildpath}/CMakeLists.txt"].each do |s|
