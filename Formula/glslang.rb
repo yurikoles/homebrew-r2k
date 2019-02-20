@@ -12,8 +12,13 @@ class Glslang < Formula
 
   def install
     # Disabling Tests for now
-    args = std_cmake_args + %w[
-      -DBUILD_SHARED_LIBS=ON
+    args = std_cmake_args + [
+      "-DBUILD_SHARED_LIBS=ON",
+      "-DCMAKE_CXX_FLAGS='\"-I'#{HOMEBREW_PREFIX}/include'\"'",
+      "-DCMAKE_STATIC_LINKER_FLAGS=#{Formula["spirv-tools"].opt_prefix}/libSPIRV-Tools.a",
+      "-DCMAKE_EXE_LINKER_FLAGS='\"-L'#{HOMEBREW_PREFIX}/lib\"",
+      "-DENABLE_GLSLANG_BINARIES=OFF",
+      "-DBUILD_SHARED_LIBS=ON",
     ]
 
     (buildpath/"external").install_symlink "#{Formula['spirv-tools'].opt_prefix}" => "spirv-tools"
