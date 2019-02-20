@@ -32,9 +32,6 @@ class Glslang < Formula
       s.gsub! "target_include_directories(SPIRV PUBLIC ../External)", "target_include_directories(SPIRV PUBLIC #{HOMEBREW_PREFIX}/include)"
     end
 
-    #(buildpath/"external").install_symlink "#{Formula['spirv-tools'].opt_prefix}" => "spirv-tools"
-    #Forcing the use of spirv-tools
-
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args
       system "ninja"
