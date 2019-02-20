@@ -21,7 +21,11 @@ class Glslang < Formula
       "-DBUILD_SHARED_LIBS=ON",
     ]
 
-    (buildpath/"external").install_symlink "#{Formula['spirv-tools'].opt_prefix}" => "spirv-tools"
+    inreplace Dir["#{buildpath}/CMakeLists.txt"].each do |s|
+      s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
+    end
+
+    #(buildpath/"external").install_symlink "#{Formula['spirv-tools'].opt_prefix}" => "spirv-tools"
     #Forcing the use of spirv-tools
 
     mkdir "build" do
