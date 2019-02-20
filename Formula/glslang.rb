@@ -23,6 +23,13 @@ class Glslang < Formula
 
     inreplace Dir["#{buildpath}/CMakeLists.txt"].each do |s|
       s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
+      s.gsub! "if(ENABLE_OPT)", \
+              "set(ENABLE_OPT ON)" \
+              "if(ENABLE_OPT)"
+    end
+
+    inreplace Dir["#{buildpath}/SPIRV/CMakeLists.txt"].each do |s|
+      s.gsub! "target_include_directories(SPIRV PUBLIC ../External)", "target_include_directories(SPIRV PUBLIC #{HOMEBREW_PREFIX}/include)"
     end
 
     #(buildpath/"external").install_symlink "#{Formula['spirv-tools'].opt_prefix}" => "spirv-tools"
