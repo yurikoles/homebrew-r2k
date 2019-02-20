@@ -24,7 +24,7 @@ class Glslang < Formula
     inreplace Dir["#{buildpath}/CMakeLists.txt"].each do |s|
       s.gsub! "add_subdirectory(External)", "# add_subdirectory(External)"
       s.gsub! "if(ENABLE_OPT)", \
-              "set(ENABLE_OPT ON)" \
+              "set(ENABLE_OPT ON)\n" \
               "if(ENABLE_OPT)"
     end
 
