@@ -1,9 +1,8 @@
 class VulkanPortability < Formula
   desc "Provides the spec description and header files for the Vulkan Portability extension"
   homepage "https://github.com/KhronosGroup/Vulkan-Portability"
-  url "https://github.com/KhronosGroup/Vulkan-Portability/archive/v0.2.tar.gz"
-  sha256 "2508a2dd0e111cb7d4636a54d454e7172ab33c48cba0e6e86e6fdb7cf48becb5"
-  head "https://github.com/KhronosGroup/Vulkan-Portability.git", :tag => "v0.2"
+  url "https://github.com/KhronosGroup/Vulkan-Portability.git", :commit => "53be040f04ce55463d0e5b25fd132f45f003e903"
+  head "https://github.com/KhronosGroup/Vulkan-Portability.git"
   depends_on "cmake" => :build
   depends_on "vulkan-headers"
 
