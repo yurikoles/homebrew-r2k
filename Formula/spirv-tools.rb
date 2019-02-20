@@ -6,10 +6,6 @@ class SpirvTools < Formula
   depends_on "cmake" => :build
   depends_on "rafaga/r2k/spirv-headers"
 
-  # resource "SPIRV-Headers" do
-  #   url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git, :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"
-  # end
-
   def install
     # Disabling Tests for now
     args = std_cmake_args + [
@@ -17,9 +13,6 @@ class SpirvTools < Formula
       "-DSPIRV-Headers_SOURCE_DIR=#{HOMEBREW_PREFIX}",
       "-DSPIRV_SKIP_TESTS=ON"
     ]
-    # resources.each do |resource|
-    #   resource.stage buildpath/"external"/resource.name
-    # end
 
     mkdir "build" do
       system "cmake", "..", *args
