@@ -6,8 +6,8 @@ class Glslang < Formula
   version "7.11.3113"
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "spirv-headers" => :build
-  depends_on "spirv-tools"
+  depends_on "rafaga/r2k/spirv-headers" => :build
+  depends_on "rafaga/r2k/spirv-tools"
   depends_on "bison" => :optional
 
   def install

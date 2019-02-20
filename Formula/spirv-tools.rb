@@ -4,7 +4,7 @@ class SpirvTools < Formula
   url "https://github.com/KhronosGroup/SPIRV-Tools.git", :commit => "117a1fd11f11e9bef9faa563c3d5156cc6ab529c"
   head "https://github.com/KhronosGroup/SPIRV-Tools.git"
   depends_on "cmake" => :build
-  depends_on "spirv-headers"
+  depends_on "rafaga/r2k/spirv-headers"
 
   # resource "SPIRV-Headers" do
   #   url "https://github.com/KhronosGroup/SPIRV-Headers.git", :using => :git, :commit => "8bea0a266ac9b718aa0818d9e3a47c0b77c2cb23"

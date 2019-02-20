@@ -11,8 +11,8 @@ class Moltenvk < Formula
   depends_on "rafaga/r2k/vulkan-headers"
   depends_on "rafaga/r2k/vulkan-portability"
   depends_on "rafaga/r2k/glslang"
-  depends_on "spirv-cross"
-  depends_on "spirv-tools"
+  depends_on "rafaga/r2k/spirv-cross"
+  depends_on "rafaga/r2k/spirv-tools"
 
   # resource "VulkanSamples" do
   #   url "https://github.com/LunarG/VulkanSamples.git", :commit => "5810b01149ef4f76fd92d7e085d980017379a93b"
