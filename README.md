@@ -6,7 +6,7 @@ Currently in testing Phase (not for production)
 # Formulae Status
 
 * GLSLang - OK
-* MoltenVK - Tehre are some linking problems that needs to be addressed
+* MoltenVK - There are some linking problems that needs to be addressed
 * SPIRV-Cross - OK
 * SPIRV-Headers - OK
 * SPIRV-Tools - OK
