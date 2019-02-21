@@ -4,11 +4,12 @@ HomeBrew Tap containing Formulae to build Vulkan Tools and API, build SPIRV tool
 Currently in testing Phase (not for production)
 
 # Formulae Status
-GLSLang - OK
-MoltenVK - Tehre are some linking problems that needs to be addressed
-SPIRV-Cross - OK
-SPIRV-Headers - OK
-SPIRV-Tools - OK
-Vulkan-Headers - OK
-Vulkan-Portability - OK
-Vulkan-Tools - OK
+
+* GLSLang - OK
+* MoltenVK - Tehre are some linking problems that needs to be addressed
+* SPIRV-Cross - OK
+* SPIRV-Headers - OK
+* SPIRV-Tools - OK
+* Vulkan-Headers - OK
+* Vulkan-Portability - OK
+* Vulkan-Tools - OK
