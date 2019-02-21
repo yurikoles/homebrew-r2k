@@ -55,7 +55,7 @@ class Moltenvk < Formula
       s.gsub! "name = libSPIRVCross.a; path = ../External/build/macOS/libSPIRVCross.a;", "name = libspirv-cross-core.a; path = #{HOMEBREW_PREFIX}/lib/libspirv-cross-core.a;"
       s.gsub! "path = ../External/build/macOS/libglslang.a;", "path = #{HOMEBREW_PREFIX}/lib/libglslang.a;"
       s.gsub! "OTHER_LDFLAGS = \"-ObjC\";", \
-          "OTHER_LDFLAGS = \"-ObjC -lglslang\";" \
+          "OTHER_LDFLAGS = \"-ObjC\";" \
           "HEADER_SEARCH_PATHS = (" \
           "\"$(inherited)\"," \
           "\"/usr/local/include/spirv_cross/**\"," \
