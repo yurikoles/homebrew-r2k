@@ -2,6 +2,7 @@ class VulkanHeaders < Formula
   desc "Provides header files and the Vulkan API definition (registry)"
   homepage "https://github.com/KhronosGroup/Vulkan-Headers"
   url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
+  version "1.1.97"
   head "https://github.com/KhronosGroup/Vulkan-Headers.git"
   depends_on "cmake" => :build
 
@@ -25,5 +26,3 @@ class VulkanHeaders < Formula
     system "false"
   end
 end
-
-

@@ -1,7 +1,8 @@
 class SpirvCross < Formula
-  desc "Provides a tool for parsing and converting SPIR-V to other shader language"
+  desc "Tool for parsing and converting SPIR-V to other shader language"
   homepage "https://github.com/KhronosGroup/SPIRV-Cross"
   url "https://github.com/KhronosGroup/SPIRV-Cross.git", :commit => "a029d3faa12082bb4fac78351701d832716759df"
+  version "2019-01-31"
   head "https://github.com/KhronosGroup/SPIRV-Cross.git"
   depends_on "cmake" => :build
   depends_on "rafaga/r2k/spirv-headers" => :build
