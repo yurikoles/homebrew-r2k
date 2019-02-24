@@ -2,13 +2,14 @@ class Glslang < Formula
   desc "OpenGL and OpenGL ES shader front end and validator"
   homepage "https://github.com/KhronosGroup/glslang"
   url "https://github.com/KhronosGroup/glslang.git", :commit => "2898223375d57fb3974f24e1e944bb624f67cb73"
-  version "7.11.3113"
+  version "moltenvk-1.0.32"
   head "https://github.com/KhronosGroup/glslang.git"
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "rafaga/r2k/spirv-headers" => :build
   depends_on "rafaga/r2k/spirv-tools"
-  depends_on "bison" => :optional
+  conflicts_with "homebrew/core/glslang"
 
   def install
     # Disabling Tests for now

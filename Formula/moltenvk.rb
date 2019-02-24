@@ -3,6 +3,7 @@ class Moltenvk < Formula
   homepage "https://github.com/KhronosGroup/MoltenVK"
   url "https://github.com/KhronosGroup/MoltenVK.git", :tag => "v1.0.32"
   head "https://github.com/KhronosGroup/MoltenVK.git"
+
   depends_on "cereal" => :build
   depends_on "cmake" => :build
   depends_on "ninja" => :build

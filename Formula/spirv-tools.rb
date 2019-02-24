@@ -2,8 +2,9 @@ class SpirvTools < Formula
   desc "Provides an API and commands for processing SPIR-V modules"
   homepage "https://github.com/KhronosGroup/SPIRV-Tools"
   url "https://github.com/KhronosGroup/SPIRV-Tools.git", :commit => "117a1fd11f11e9bef9faa563c3d5156cc6ab529c"
-  version "2018.4"
+  version "moltenvk-1.0.32"
   head "https://github.com/KhronosGroup/SPIRV-Tools.git"
+
   depends_on "cmake" => :build
   depends_on "rafaga/r2k/spirv-headers"
 
