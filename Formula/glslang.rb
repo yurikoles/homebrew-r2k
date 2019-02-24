@@ -1,14 +1,15 @@
 class Glslang < Formula
-  desc "An OpenGL and OpenGL ES shader front end and validator"
+  desc "OpenGL and OpenGL ES shader front end and validator"
   homepage "https://github.com/KhronosGroup/glslang"
   url "https://github.com/KhronosGroup/glslang.git", :commit => "2898223375d57fb3974f24e1e944bb624f67cb73"
+  version "moltenvk-1.0.32"
   head "https://github.com/KhronosGroup/glslang.git"
-  version "7.11.3113"
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "rafaga/r2k/spirv-headers" => :build
   depends_on "rafaga/r2k/spirv-tools"
-  depends_on "bison" => :optional
+  conflicts_with "homebrew/core/glslang"
 
   def install
     # Disabling Tests for now
@@ -28,9 +29,9 @@ class Glslang < Formula
               "if(ENABLE_OPT)"
     end
 
-    inreplace Dir["#{buildpath}/SPIRV/CMakeLists.txt"].each do |s|
-      s.gsub! "target_include_directories(SPIRV PUBLIC ../External)", "target_include_directories(SPIRV PUBLIC #{HOMEBREW_PREFIX}/include)"
-    end
+    inreplace Dir["#{buildpath}/SPIRV/CMakeLists.txt"],
+    "target_include_directories(SPIRV PUBLIC ../External)",
+     "target_include_directories(SPIRV PUBLIC #{HOMEBREW_PREFIX}/include)"
 
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args

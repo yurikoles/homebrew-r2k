@@ -2,8 +2,11 @@ class VulkanHeaders < Formula
   desc "Provides header files and the Vulkan API definition (registry)"
   homepage "https://github.com/KhronosGroup/Vulkan-Headers"
   url "https://github.com/KhronosGroup/Vulkan-Headers.git", :commit => "c200cb25db0f47364d3318d92c1d8e9dfff2fef1"
+  version "moltenvk-1.0.32"
   head "https://github.com/KhronosGroup/Vulkan-Headers.git"
+
   depends_on "cmake" => :build
+  conflicts_with "homebrew/core/vulkan-headers"
 
   def install
     mkdir "build" do
@@ -25,5 +28,3 @@ class VulkanHeaders < Formula
     system "false"
   end
 end
-
-

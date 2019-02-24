@@ -1,8 +1,10 @@
 class VulkanTools < Formula
-  desc "Provides Vulkan tools and utilities that verify the correct use of the Vulkan API on Applications"
+  desc "Tools and utilities to verify use of Vulkan API on Applications"
   homepage "https://github.com/KhronosGroup/Vulkan-Tools"
   url "https://github.com/KhronosGroup/Vulkan-Tools.git", :commit => "ff56a741b1cce8ae20ff6276f51100e668e9c4f5"
+  version "moltenvk-1.0.32"
   head "https://github.com/KhronosGroup/Vulkan-Tools.git"
+
   depends_on "cmake" => :build
   depends_on "python" => :build
 
@@ -16,8 +18,8 @@ class VulkanTools < Formula
     end
     args = std_cmake_args + [
       "-DBUILD_CUBE=OFF",
-      "-DBUILD_VULKANINFO=ON"
-      "-DMOLTENVK_REPO_ROOT=#{prefix}/external/"
+      "-DBUILD_VULKANINFO=ON",
+      "-DMOLTENVK_REPO_ROOT=#{prefix}/external/",
     ]
     mkdir "build" do
       system "cmake", "..", *args
