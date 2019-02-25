@@ -2,7 +2,7 @@ class SpirvCross < Formula
   desc "Tool for parsing and converting SPIR-V to other shader language"
   homepage "https://github.com/KhronosGroup/SPIRV-Cross"
   url "https://github.com/KhronosGroup/SPIRV-Cross.git", :commit => "a029d3faa12082bb4fac78351701d832716759df"
-  version "moltenvk-1.0.32"
+  version "2019-02-20"
   head "https://github.com/KhronosGroup/SPIRV-Cross.git"
 
   depends_on "cmake" => :build

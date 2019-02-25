@@ -2,7 +2,7 @@ class SpirvHeaders < Formula
   desc "Provides the header files for the Vulkan SPIR-V Registry"
   homepage "https://github.com/KhronosGroup/SPIRV-Headers"
   url "https://github.com/KhronosGroup/SPIRV-Headers.git", :commit => "79b6681aadcb53c27d1052e5f8a0e82a981dbf2f"
-  version "moltenvk-1.0.32"
+  version "1.1-rc2-git79b6681aadcb"
   head "https://github.com/KhronosGroup/SPIRV-Headers.git"
 
   depends_on "cmake" => :build
