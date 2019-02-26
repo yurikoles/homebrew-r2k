@@ -90,6 +90,8 @@ class Moltenvk < Formula
       "MoltenVKPackaging.xcodeproj",
       "-scheme",
       "MoltenVK Package (macOS only)",
+      "-derivedDataPath",
+      "./DerivedData",
       "build",
       "SYMROOT=build",
       "OBJROOT=build"
