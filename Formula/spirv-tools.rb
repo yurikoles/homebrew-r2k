@@ -12,9 +12,15 @@ class SpirvTools < Formula
     # Disabling Tests for now
     args = std_cmake_args + [
       "-DSPIRV_BUILD_COMPRESSION=ON",
-      "-DSPIRV-Headers_SOURCE_DIR=#{HOMEBREW_PREFIX}",
       "-DSPIRV_SKIP_TESTS=ON",
     ]
+
+    inreplace Dir["#{buildpath}/CMakeLists.txt"].each do |s|
+      s.gsub! "add_subdirectory(external)",
+              "# add_subdirectory(external)\n" \
+              "set(SPIRV_HEADER_DIR #{Formula["rafaga/r2k/spirv-headers"].opt_include})\n" \
+              "set(SPIRV_HEADER_INCLUDE_DIR #{Formula["rafaga/r2k/spirv-headers"].opt_include})"
+    end
 
     mkdir "build" do
       system "cmake", "..", *args

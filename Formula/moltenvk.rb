@@ -1,8 +1,8 @@
 class Moltenvk < Formula
   desc "Implementation of the Vulkan 1.0 API, that runs on Apple's Metal API"
   homepage "https://github.com/KhronosGroup/MoltenVK"
-  version "1.0.32"
   url "https://github.com/KhronosGroup/MoltenVK.git", :tag => "v1.0.32"
+  version "1.0.32"
   head "https://github.com/KhronosGroup/MoltenVK.git"
 
   depends_on "cereal" => :build
@@ -41,40 +41,41 @@ class Moltenvk < Formula
           "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;" \
           "HEADER_SEARCH_PATHS = (" \
           "\"$(inherited)\"," \
-          "\"/usr/local/include/spirv_cross/**\"," \
-          "\"/usr/local/include/spirv-tools/**\"," \
-          "\"/usr/local/include/\"," \
-          "\"/usr/local/include/spirv/**\"," \
-          "\"/usr/local/include/glslang/**\"," \
-          ");"
+          "\"#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**\"," \
+          "\"#{Formula["rafaga/r2k/spirv-tools"].opt_include}/**\"," \
+          "\"#{HOMEBREW_PREFIX}/include/\"," \
+          "\"#{Formula["rafaga/r2k/spirv-headers"].opt_include}/**\"," \
+          "\"#{Formula["rafaga/r2k/glslang"].opt_include}/**\"," \
+          ");" \
+          "LIBRARY_SEARCH_PATHS = #{HOMEBREW_PREFIX}/lib/;"
       s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;", "MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",',
-      '"\"' + "#{HOMEBREW_PREFIX}/include/spirv_cross/**" +'\"",'
+      '"\"' + "#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/\"",',
-      '"\"' + "#{HOMEBREW_PREFIX}/include/spirv-tools/**" +'\"",'
+      '"\"' + "#{Formula["rafaga/r2k/spirv-tools"].opt_include}/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/include\"",',
       '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/External/spirv-tools/external/spirv-headers/include\"",',
-       '"\"' + "#{HOMEBREW_PREFIX}/include/spirv/**" +'\"",'
+       '"\"' + "#{Formula["rafaga/r2k/spirv-headers"].opt_include}/**" +'\"",'
       s.gsub! '"\"$(SRCROOT)/glslang/build/External/spirv-tools\"",',
-      '"\"' + "#{HOMEBREW_PREFIX}/include/glslang/**" +'\"",'
+      '"\"' + "#{Formula["rafaga/r2k/glslang"].opt_include}/**" +'\"",'
       s.gsub! "name = libSPIRVTools.a; path = ../External/build/macOS/libSPIRVTools.a;",
-              "name = libSPIRV-Tools.a; path = #{HOMEBREW_PREFIX}/lib/libSPIRV-Tools.a;"
+              "name = libSPIRV-Tools.a; path = #{Formula["rafaga/r2k/spirv-tools"].opt_lib}/libSPIRV-Tools.a;"
       s.gsub! "name = libSPIRVCross.a; path = ../External/build/macOS/libSPIRVCross.a;",
-      "name = libspirv-cross-core.a; path = #{HOMEBREW_PREFIX}/lib/libspirv-cross-core.a;"
+      "name = libspirv-cross-core.a; path = #{Formula["rafaga/r2k/spirv-cross"].opt_lib}/libspirv-cross-core.a;"
       s.gsub! "path = ../External/build/macOS/libglslang.a;",
-       "path = #{HOMEBREW_PREFIX}/lib/libglslang.a;"
+       "path = #{Formula["rafaga/r2k/glslang"].opt_lib}/libglslang.a;"
       s.gsub! "OTHER_LDFLAGS = \"-ObjC\";", \
           "OTHER_LDFLAGS = \"-ObjC\";" \
           "HEADER_SEARCH_PATHS = (" \
           "\"$(inherited)\"," \
-          "\"/usr/local/include/spirv_cross/**\"," \
-          "\"/usr/local/include/spirv-tools/**\"," \
-          "\"/usr/local/include/\"," \
-          "\"/usr/local/include/spirv/**\"," \
-          "\"/usr/local/include/glslang/**\"," \
+          "\"#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**\"," \
+          "\"#{Formula["rafaga/r2k/spirv-tools"].opt_include}/**\"," \
+          "\"#{HOMEBREW_PREFIX}/include/\"," \
+          "\"#{Formula["rafaga/r2k/spirv-headers"].opt_include}/**\"," \
+          "\"#{Formula["rafaga/r2k/glslang"].opt_include}/**\"," \
         ");" \
-        "LIBRARY_SEARCH_PATHS = \"/usr/local/lib/\";"
+        "LIBRARY_SEARCH_PATHS = #{HOMEBREW_PREFIX}/lib/;"
     end
 
     inreplace Dir["#{buildpath}/Scripts/package_ext_libs.sh"],
@@ -82,7 +83,7 @@ class Moltenvk < Formula
      "export MVK_EXT_LIB_DST_DIR=\"#{HOMEBREW_PREFIX}/lib/\""
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
-      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', '"\"' + "#{HOMEBREW_PREFIX}/include/" +'\"",'
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', "\"#{Formula["cereal"].opt_include}\","
       s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;", "MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
     end
 
