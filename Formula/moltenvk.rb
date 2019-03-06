@@ -3,11 +3,13 @@ class Moltenvk < Formula
   homepage "https://github.com/KhronosGroup/MoltenVK"
   url "https://github.com/KhronosGroup/MoltenVK.git", :tag => "v1.0.32"
   version "1.0.32"
+  revision 1
   head "https://github.com/KhronosGroup/MoltenVK.git"
 
   depends_on "cereal" => :build
   depends_on "cmake" => :build
   depends_on "ninja" => :build
+  depends_on "pkg-config" => [:build, :test]
   depends_on "python" => :build
   depends_on "rafaga/r2k/glslang"
   depends_on "rafaga/r2k/spirv-cross"
@@ -38,7 +40,10 @@ class Moltenvk < Formula
       s.gsub! '"\"$(SRCROOT)/../External/build/macOS\""', '"\"' + "#{HOMEBREW_PREFIX}/lib/" +'\""'
       # includes
       s.gsub! "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;", \
-          "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;" \
+          "OTHER_LDFLAGS = (" \
+          "\"-L#{Formula["rafaga/r2k/glslang"].opt_lib}\"," \
+          "\"-lglslang\"," \
+          ");" \
           "HEADER_SEARCH_PATHS = (" \
           "\"$(inherited)\"," \
           "\"#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**\"," \
@@ -47,7 +52,9 @@ class Moltenvk < Formula
           "\"#{Formula["rafaga/r2k/spirv-headers"].opt_include}/**\"," \
           "\"#{Formula["rafaga/r2k/glslang"].opt_include}/**\"," \
           ");" \
-          "LIBRARY_SEARCH_PATHS = #{HOMEBREW_PREFIX}/lib/;"
+          "LIBRARY_SEARCH_PATHS = \"#{HOMEBREW_PREFIX}/lib/\";" \
+          "PRODUCT_NAME = MoltenVKGLSLToSPIRVConverter;" \
+
       s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;", "MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
       s.gsub! '"\"$(SRCROOT)/SPIRV-Cross\"",',
       '"\"' + "#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**" +'\"",'
@@ -83,7 +90,11 @@ class Moltenvk < Formula
      "export MVK_EXT_LIB_DST_DIR=\"#{HOMEBREW_PREFIX}/lib/\""
 
     inreplace "#{buildpath}/MoltenVK/MoltenVK.xcodeproj/project.pbxproj" do |s|
-      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', "\"#{Formula["cereal"].opt_include}\","
+      s.gsub! '"\"$(SRCROOT)/../External/cereal/include\"",', 
+              "\"#{Formula["cereal"].opt_include}\"," \
+              "\"#{Formula["rafaga/r2k/vulkan-headers"].opt_include}\"," \
+              "\"#{Formula["rafaga/r2k/vulkan-portability"].opt_include}\"," \
+              "\"#{Formula["rafaga/r2k/spirv-cross"].opt_include}/**\","
       s.gsub! "MACOSX_DEPLOYMENT_TARGET = 10.11;", "MACOSX_DEPLOYMENT_TARGET = #{MacOS.version};"
     end
 

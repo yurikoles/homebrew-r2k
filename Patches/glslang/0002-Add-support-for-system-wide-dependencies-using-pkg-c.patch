@@ -1,0 +1,99 @@
+From 50aa12a1a18ddba19cb6582ca8a4a5f2afb8088f Mon Sep 17 00:00:00 2001
+From: [redacted]
+Date: Tue, 5 Mar 2019 13:41:01 -0600
+Subject: [PATCH 2/3] Add support for system-wide dependencies using pkg-config
+
+---
+ CMakeLists.txt            |  4 ++++
+ SPIRV/CMakeLists.txt      |  9 ++++-----
+ SPIRV/SpvTools.cpp        |  4 ++--
+ StandAlone/CMakeLists.txt | 10 +++++++++-
+ 4 files changed, 19 insertions(+), 8 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5dc9c664..712d79fd 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -32,6 +32,10 @@ option(ENABLE_HLSL "Enables HLSL input support" ON)
+ 
+ option(ENABLE_OPT "Enables spirv-opt capability if present" ON)
+ 
++# using pkg-config to configure include paths and link libraries
++include(FindPkgConfig)
++pkg_check_modules(SPIRV_TOOLS REQUIRED SPIRV-Tools>=2019.2.1)
++
+ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND WIN32)
+     set(CMAKE_INSTALL_PREFIX "install" CACHE STRING "..." FORCE)
+ endif()
+diff --git a/SPIRV/CMakeLists.txt b/SPIRV/CMakeLists.txt
+index b683ce98..70301953 100644
+--- a/SPIRV/CMakeLists.txt
++++ b/SPIRV/CMakeLists.txt
+@@ -43,14 +43,13 @@ if(ENABLE_NV_EXTENSIONS)
+          GLSL.ext.NV.h)
+ endif(ENABLE_NV_EXTENSIONS)
+ 
+-# using pkg-config to configure include paths and link libraries
+-pkg_check_modules(SPIRV_DEPS REQUIRES SPIRV-Tools>=2019.1-git117a1fd11e9b_1)
+-apply_pkg_config(SPIRV PUBLIC SPIRV_DEPS)
+-
+ add_library(SPIRV ${LIB_TYPE} ${SOURCES} ${HEADERS})
+ set_property(TARGET SPIRV PROPERTY FOLDER glslang)
+ set_property(TARGET SPIRV PROPERTY POSITION_INDEPENDENT_CODE ON)
+ target_include_directories(SPIRV PUBLIC ..)
++target_include_directories(SPIRV PUBLIC ${SPIRV_TOOLS_INCLUDE_DIRS})
++target_compile_options(SPIRV PUBLIC ${SPIRV_TOOLS_CFLAGS_OTHER})
++target_link_libraries(SPIRV ${SPIRV_TOOLS_LIBRARIES})
+ 
+ set(SPIRV_NAME spirv)
+ set(SPIRV_VERSION 1.3)
+@@ -74,7 +73,7 @@ if(ENABLE_OPT)
+         PRIVATE ${spirv-tools_SOURCE_DIR}/source
+     )
+     target_link_libraries(SPIRV glslang SPIRV-Tools-opt)
+-    target_include_directories(SPIRV PUBLIC ../External)
++    # target_include_directories(SPIRV PUBLIC ../External)
+ else()
+     target_link_libraries(SPIRV glslang)
+ endif(ENABLE_OPT)
+diff --git a/SPIRV/SpvTools.cpp b/SPIRV/SpvTools.cpp
+index eec06e0a..723a6445 100644
+--- a/SPIRV/SpvTools.cpp
++++ b/SPIRV/SpvTools.cpp
+@@ -43,8 +43,8 @@
+ #include <iostream>
+ 
+ #include "SpvTools.h"
+-#include "spirv-tools/optimizer.hpp"
+-#include "spirv-tools/libspirv.h"
++#include <spirv-tools/optimizer.hpp>
++#include <spirv-tools/libspirv.h>
+ 
+ namespace glslang {
+ 
+diff --git a/StandAlone/CMakeLists.txt b/StandAlone/CMakeLists.txt
+index 5cea53d9..58158ebf 100644
+--- a/StandAlone/CMakeLists.txt
++++ b/StandAlone/CMakeLists.txt
+@@ -31,9 +31,17 @@ elseif(UNIX)
+     endif()
+ endif(WIN32)
+ 
++target_include_directories(glslangValidator PUBLIC ${SPIRV_TOOLS_INCLUDE_DIRS})
++target_compile_options(glslangValidator PUBLIC ${SPIRV_TOOLS_CFLAGS_OTHER})
++target_link_libraries(glslangValidator ${SPIRV_TOOLS_LIBRARIES})
++
++target_include_directories(spirv-remap PUBLIC ${SPIRV_TOOLS_INCLUDE_DIRS})
++target_compile_options(spirv-remap PUBLIC ${SPIRV_TOOLS_CFLAGS_OTHER})
++target_link_libraries(spirv-remap ${SPIRV_TOOLS_LIBRARIES})
++
+ target_link_libraries(glslangValidator ${LIBRARIES})
+ target_link_libraries(spirv-remap ${LIBRARIES})
+-target_include_directories(glslangValidator PUBLIC ../External)
++# target_include_directories(glslangValidator PUBLIC ../External)
+ 
+ if(WIN32)
+     source_group("Source" FILES ${SOURCES})
+-- 
+2.21.0
+

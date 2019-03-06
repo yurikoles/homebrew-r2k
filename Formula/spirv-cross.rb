@@ -8,6 +8,7 @@ class SpirvCross < Formula
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
+  depends_on "pkg-config" => :build
   depends_on "rafaga/r2k/spirv-headers" => :build
   conflicts_with "homebrew/core/spirv-cross"
 

@@ -1,0 +1,106 @@
+From 975314ca47ac8f33adb0ddb50a1d09f52fe14b7d Mon Sep 17 00:00:00 2001
+From: [redacted]
+Date: Mon, 4 Mar 2019 16:29:16 -0600
+Subject: [PATCH 1/3] enable compatibility with pkg-config utility
+
+---
+ SPIRV/CMakeLists.txt        | 10 ++++++++++
+ SPIRV/spirv.pc.cmake.in     | 11 +++++++++++
+ glslang/CMakeLists.txt      |  3 +++
+ glslang/glslang.pc.cmake.in | 11 +++++++++++
+ 4 files changed, 35 insertions(+)
+ create mode 100644 SPIRV/spirv.pc.cmake.in
+ create mode 100644 glslang/glslang.pc.cmake.in
+
+diff --git a/SPIRV/CMakeLists.txt b/SPIRV/CMakeLists.txt
+index 1997e74c..b683ce98 100644
+--- a/SPIRV/CMakeLists.txt
++++ b/SPIRV/CMakeLists.txt
+@@ -43,11 +43,18 @@ if(ENABLE_NV_EXTENSIONS)
+          GLSL.ext.NV.h)
+ endif(ENABLE_NV_EXTENSIONS)
+ 
++# using pkg-config to configure include paths and link libraries
++pkg_check_modules(SPIRV_DEPS REQUIRES SPIRV-Tools>=2019.1-git117a1fd11e9b_1)
++apply_pkg_config(SPIRV PUBLIC SPIRV_DEPS)
++
+ add_library(SPIRV ${LIB_TYPE} ${SOURCES} ${HEADERS})
+ set_property(TARGET SPIRV PROPERTY FOLDER glslang)
+ set_property(TARGET SPIRV PROPERTY POSITION_INDEPENDENT_CODE ON)
+ target_include_directories(SPIRV PUBLIC ..)
+ 
++set(SPIRV_NAME spirv)
++set(SPIRV_VERSION 1.3)
++
+ if (ENABLE_SPVREMAPPER)
+     add_library(SPVRemapper ${LIB_TYPE} ${SPVREMAP_SOURCES} ${SPVREMAP_HEADERS})
+     set_property(TARGET SPVRemapper PROPERTY FOLDER glslang)
+@@ -96,5 +103,8 @@ if(ENABLE_GLSLANG_INSTALL)
+                 ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+     endif()
+ 
++    # spirv.pc Configuration
++    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/spirv.pc.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/spirv.pc @ONLY)
++    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/spirv.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+     install(FILES ${HEADERS} ${SPVREMAP_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/SPIRV/)
+ endif(ENABLE_GLSLANG_INSTALL)
+diff --git a/SPIRV/spirv.pc.cmake.in b/SPIRV/spirv.pc.cmake.in
+new file mode 100644
+index 00000000..dfcad940
+--- /dev/null
++++ b/SPIRV/spirv.pc.cmake.in
+@@ -0,0 +1,11 @@
++    prefix=@CMAKE_INSTALL_PREFIX@
++    exec_prefix=@CMAKE_INSTALL_PREFIX@
++    libdir=${exec_prefix}/@CMAKE_INSTALL_LIBDIR@
++    includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
++    
++    Name: @SPIRV_NAME@
++    Description: SPIR-V is a binary intermediate language for representing graphical-shader stages and compute kernels for multiple Khronos APIs, including OpenCL, OpenGL, and Vulkan
++    Requires:
++    Version: @SPIRV_VERSION@
++    Libs: -L${libdir} -lSPIRV
++    Cflags: -I${includedir}
+\ No newline at end of file
+diff --git a/glslang/CMakeLists.txt b/glslang/CMakeLists.txt
+index 5f51476b..daf717fa 100644
+--- a/glslang/CMakeLists.txt
++++ b/glslang/CMakeLists.txt
+@@ -80,6 +80,7 @@ set(HEADERS
+ #                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+ # set(BISON_GLSLParser_OUTPUT_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/MachineIndependent/glslang_tab.cpp)
+ 
++set(VERSION 7.11.3113)
+ glslang_pch(SOURCES MachineIndependent/pch.cpp)
+ 
+ add_library(glslang ${LIB_TYPE} ${BISON_GLSLParser_OUTPUT_SOURCE} ${SOURCES} ${HEADERS})
+@@ -113,6 +114,8 @@ if(ENABLE_GLSLANG_INSTALL)
+         install(TARGETS glslang
+                 ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+     endif()
++    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/glslang.pc.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/glslang.pc @ONLY)
++    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/glslang.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+ endif(ENABLE_GLSLANG_INSTALL)
+ 
+ if(ENABLE_GLSLANG_INSTALL)
+diff --git a/glslang/glslang.pc.cmake.in b/glslang/glslang.pc.cmake.in
+new file mode 100644
+index 00000000..921497eb
+--- /dev/null
++++ b/glslang/glslang.pc.cmake.in
+@@ -0,0 +1,11 @@
++    prefix=@CMAKE_INSTALL_PREFIX@
++    exec_prefix=@CMAKE_INSTALL_PREFIX@
++    libdir=${exec_prefix}/@CMAKE_INSTALL_LIBDIR@
++    includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
++    
++    Name: @PROJECT_NAME@
++    Description: OpenGL and OpenGL ES shader front end and validator
++    Requires:
++    Version: @VERSION@
++    Libs: -L${libdir} -lglslang -lOSDependent -lHLSL -lOGLCompiler -lSPVRemapper
++    Cflags: -I${includedir}
+\ No newline at end of file
+-- 
+2.21.0
+

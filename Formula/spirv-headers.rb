@@ -8,10 +8,11 @@ class SpirvHeaders < Formula
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
+  depends_on "pkg-config" => [:build, :test]
 
   def install
     args = std_cmake_args + [
-      "-DSPIRV_HEADERS_SKIP_EXAMPLES=ON",
+      "-DSPIRV_HEADERS_SKIP_EXAMPLES=OFF",
     ]
     mkdir "build" do
       system "cmake", "-G", "Ninja", "..", *args

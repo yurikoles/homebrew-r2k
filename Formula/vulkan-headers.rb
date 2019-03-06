@@ -8,6 +8,7 @@ class VulkanHeaders < Formula
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
+  depends_on "pkg-config" => [:build, :test]
   conflicts_with "homebrew/core/vulkan-headers"
 
   def install
