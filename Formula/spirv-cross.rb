@@ -3,13 +3,15 @@ class SpirvCross < Formula
   homepage "https://github.com/KhronosGroup/SPIRV-Cross"
   url "https://github.com/KhronosGroup/SPIRV-Cross.git", :commit => "a029d3faa12082bb4fac78351701d832716759df"
   version "2019-02-20"
-  revision 1
+  revision 2
   head "https://github.com/KhronosGroup/SPIRV-Cross.git"
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "pkg-config" => :build
   depends_on "rafaga/r2k/spirv-headers" => :build
+  depends_on "glm" => :test
+  depends_on "rafaga/r2k/glslang" => :test
   conflicts_with "homebrew/core/spirv-cross"
 
   def install
@@ -37,6 +39,10 @@ class SpirvCross < Formula
       system "ninja"
       system "ninja", "install"
     end
+
+    # required for tests
+    prefix.install "samples"
+    (include/"spirv_cross").install Dir["include/spirv_cross/*"]
   end
 
   def pc_file; <<~EOS
@@ -54,6 +60,10 @@ class SpirvCross < Formula
   end
 
   test do
-    system "false"
+    cp_r Dir[prefix/"samples/cpp/*"], testpath
+    inreplace "Makefile", "-I../../include", "-I#{include}"
+    inreplace "Makefile", "../../spirv-cross", "spirv-cross"
+
+    system "make"
   end
 end
